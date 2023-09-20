@@ -1,4 +1,5 @@
 add_library(ramulator-example OBJECT)
+target_include_directories(ramulator-example PUBLIC ../../include)
 
 target_sources(
   ramulator-example PRIVATE

@@ -5,7 +5,7 @@
 #include <list>
 #include <string>
 
-#include "base/base.h"
+#include "base.h"
 
 namespace Ramulator {
 

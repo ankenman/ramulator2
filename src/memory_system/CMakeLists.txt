@@ -1,4 +1,5 @@
 add_library(ramulator-memorysystem OBJECT)
+target_include_directories(ramulator-memorysystem PUBLIC ../../include)
 
 target_sources(
   ramulator-memorysystem PRIVATE

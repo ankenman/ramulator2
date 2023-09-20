@@ -8,7 +8,7 @@
 #include <spdlog/spdlog.h>
 #include <yaml-cpp/yaml.h>
 
-#include "base/base.h"
+#include "base.h"
 
 
 namespace Ramulator {
