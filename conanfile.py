@@ -1,4 +1,7 @@
-from conans import CMake, ConanFile, tools
+import os
+
+from conan import ConanFile
+from conan.tools.cmake import cmake_layout, CMake, CMakeToolchain
 
 
 class RamulatorConan(ConanFile):
@@ -11,14 +14,14 @@ class RamulatorConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     options = {"shared": [True, False], "fPIC": [True, False]}
     default_options = {"shared": False, "fPIC": True}
-    generators = "cmake", "cmake_find_package"
+    generators = "CMakeDeps"
 
-    requires = (
-        "argparse/2.9",
-        "fmt/10.1.0",
-        "spdlog/1.12.0",
-        "yaml-cpp/0.8.0",
-    )
+    def requirements(self):
+        self.requires("argparse/2.9")
+        self.requires("fmt/10.2.1")
+        self.requires("spdlog/1.12.0")
+        self.requires("yaml-cpp/0.8.0")
+        self.requires(self.tested_reference_str)
 
     exports_sources = (
         "CMakeLists.txt",
@@ -38,30 +41,28 @@ class RamulatorConan(ConanFile):
     )
     no_copy_source = True
 
-    __cmake = None
+    def layout(self):
+        cmake_layout(self)
 
-    @property
-    def _cmake(self):
-        if self.__cmake is None:
-            self.__cmake = CMake(self)
-        return self.__cmake
+    def generate(self):
+        tc = CMakeToolchain(self, generator='Ninja')
+        tc.generate()
 
     def build(self):
-        self._cmake.generator="Ninja"
-        self._cmake.configure(source_dir=self.source_folder)
-        self._cmake.build()
+        cmake = CMake(self)
+        cmake.configure()
+        cmake.build()
+        if not self.conf.get("tools.build:skip_test", default=False):
+            self.run("ctest test")
+
+    def test(self):
+        if can_run(self):
+            cmd = os.path.join(self.cpp.build.bindir, "example")
+            self.run(cmd, env="conanrun")
 
     def package(self):
-        self._cmake.install()
-
-    def package_id(self):
-        self.info.shared_library_package_id()
+        cmake = CMake(self)
+        cmake.install()
 
     def package_info(self):
-        self.cpp_info.set_property("cmake_find_mode", "both")
-        self.cpp_info.set_property("cmake_file_name", "ramulator")
-
-    def package_info(self):
-        self.cpp_info.names["cmake_find_package"] = "ramulator"
-        self.cpp_info.components["libramulator"].names["cmake_find_package"] = "ramulator"
-        self.cpp_info.components["libramulator"].libs = ["ramulator"]
+        self.cpp_info.libs = ["ramulator"]

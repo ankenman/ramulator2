@@ -6,16 +6,6 @@ project(
   LANGUAGES CXX
 )
 
-#### Run conan setup ####
-include(conan.cmake)
-conan_cmake_run(CONANFILE conanfile.py  # or relative build/conanfile.txt
-                BASIC_SETUP CMAKE_TARGETS
-                BUILD missing
-                BUILD_TYPE Release
-                )
-include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
-conan_basic_setup()
-
 set(CMAKE_MODULE_PATH ${CMAKE_BINARY_DIR} ${CMAKE_MODULE_PATH})
 set(CMAKE_PREFIX_PATH ${CMAKE_BINARY_DIR} ${CMAKE_PREFIX_PATH})
 
@@ -49,8 +39,8 @@ set_target_properties(ramulator PROPERTIES
 )
 target_link_libraries(
   ramulator 
-  PUBLIC yaml-cpp
-  PUBLIC spdlog
+  PUBLIC yaml-cpp::yaml-cpp
+  PUBLIC spdlog::spdlog
   PRIVATE fmt::fmt
 )
 
