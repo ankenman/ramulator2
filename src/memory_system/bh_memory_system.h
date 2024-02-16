@@ -1,7 +1,7 @@
 #ifndef     RAMULATOR_BHMEMORYSYSTEM_MEMORY_H
 #define     RAMULATOR_BHMEMORYSYSTEM_MEMORY_H
 
-#include "memory_system/memory_system.h"
+#include "ramulator/memory_system/memory_system.h"
 #include "dram/dram.h"
 
 namespace Ramulator {

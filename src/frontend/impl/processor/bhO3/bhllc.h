@@ -7,10 +7,10 @@
 #include <iostream>
 #include <fstream>
 
-#include "base/clocked.h"
-#include "base/debug.h"
-#include "base/type.h"
-#include "base/request.h"
+#include "ramulator/base/clocked.h"
+#include "ramulator/base/debug.h"
+#include "ramulator/base/type.h"
+#include "ramulator/base/request.h"
 #include "memory_system/bh_memory_system.h"
 
 // BH Changes Begin

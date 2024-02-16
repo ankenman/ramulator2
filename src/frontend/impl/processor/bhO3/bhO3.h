@@ -1,8 +1,8 @@
 #include <functional>
 #include <limits>
 
-#include "base/utils.h"
-#include "frontend/frontend.h"
+#include "ramulator/base/utils.h"
+#include "ramulator/frontend/frontend.h"
 #include "translation/translation.h"
 #include "frontend/impl/processor/bhO3/bhcore.h"
 #include "frontend/impl/processor/bhO3/bhllc.h"

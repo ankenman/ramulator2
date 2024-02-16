@@ -1,5 +1,5 @@
-#include "base/base.h"
-#include "frontend/frontend.h"
+#include "ramulator/base/base.h"
+#include "ramulator/frontend/frontend.h"
 #include "translation/translation.h"
 #include "addr_mapper/addr_mapper.h"
 #include "dram_controller/controller.h"

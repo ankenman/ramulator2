@@ -7,7 +7,7 @@
 #include <spdlog/spdlog.h>
 #include <yaml-cpp/yaml.h>
 
-#include "base/base.h"
+#include "ramulator/base/base.h"
 #include "dram/dram.h"
 #include "dram_controller/bh_scheduler.h"
 #include "dram_controller/controller.h"
